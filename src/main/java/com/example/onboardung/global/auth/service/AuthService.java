@@ -8,21 +8,29 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class SignService {
+public class AuthService {
 
     private final MemberRepository memberRepository;
     private final TokenProvider tokenProvider;
     private final PasswordEncoder passwordEncoder;
 
-    public void register(SignUpRequest request) {
+    @Transactional
+    public void signUp(SignUpRequest request) {
         memberRepository.save(Member.from(request, passwordEncoder));
     }
 
-    public void SignIn(SignUpRequest request) {
-        memberRepository.findByM
+    @Transactional(readOnly = true)
+    public void login(SignUpRequest request) {
+        Member loginMember = memberRepository.findByEmail(request.email())
+                .filter(it -> passwordEncoder.matches(request.password(), it.getPassword()))
+                .orElseThrow();
+
+        String token = tokenProvider
+                .createToken(String.format("%s:%s", loginMember.getId(), loginMember.getPassword()));
     }
 }

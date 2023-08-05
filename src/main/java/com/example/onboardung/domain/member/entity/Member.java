@@ -8,8 +8,6 @@ import jakarta.persistence.Id;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.time.LocalDateTime;
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

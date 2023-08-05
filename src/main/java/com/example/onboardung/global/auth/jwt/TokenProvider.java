@@ -1,12 +1,9 @@
 package com.example.onboardung.global.auth.jwt;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -22,15 +19,15 @@ public class TokenProvider {
     private final long tokenValidityInSeconds;
 
     public TokenProvider(
-            @Value("${secret-key}") String secretKey,
-            @Value("${token-validity-in-seconds}") long tokenValidityInSeconds
+            @Value("${jwt.secret-key}") String secretKey,
+            @Value(value = "${jwt.token-validity-in-seconds}") long tokenValidityInSeconds
     ) {
         this.secretKey = secretKey;
         this.tokenValidityInSeconds = tokenValidityInSeconds;
     }
 
     /**
-     * JWT 토큰생성 메소드
+     * JWT 토큰생성
      * @param userSpecification 유저 ID:유저 PW
      * @return Jwts 반환
      */
@@ -48,5 +45,17 @@ public class TokenProvider {
 
                 // JWT 토큰 생성
                 .compact();
+    }
+
+    /**
+     * JWT 토큰검증 - 비밀키를 토대로 Subject에 담았던 내용(ID:PW)를 복호화한다.
+     */
+    public String validateTokenAndGetSubject(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(secretKey.getBytes())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 }
