@@ -1,0 +1,13 @@
+jasypt:
+  encryptor:
+    bean: jasyptEncryptorAES
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/onboarding?serverTimezone=UTC
+    username: ENC(1/TCeEOMvacwucRrkhJQfw==)
+    password: ENC(PwKfTmzrh4W8BB5UXfCXRQ==)
+  jpa:
+    hibernate:
+    ddl-auto: update
+    show-sql: true
