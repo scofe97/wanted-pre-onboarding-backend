@@ -11,3 +11,9 @@ spring:
     hibernate:
     ddl-auto: update
     show-sql: true
+
+jwt:
+  header: Authorization
+  # #HS512 알고리즘을 사용
+  secret-key: NiOeyFbN1Gqo10bPgUyTFsRMkJpGLXSvGP04eFqj5B30r5TcrtlSXfQ7TndvYjNvfkEKLqILn0j1SmKODO1Yw3JpBBgI3nVPEahqxeY8qbPSFGyzyEVxnl4AQcrnVneI
+  token-validity-in-seconds: 86400

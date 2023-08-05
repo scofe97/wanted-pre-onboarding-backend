@@ -1,8 +1,10 @@
 package com.example.onboardung.global.config;
 
+import lombok.val;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -14,6 +16,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final String[] authenticatedUrls = {"/members/**"};
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -30,7 +34,13 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 // path 권한설정
-                .authorizeHttpRequests(authorizeRequest -> authorizeRequest.anyRequest().permitAll())
+                .authorizeHttpRequests(authorizeRequest -> {
+                    authorizeRequest
+                            .requestMatchers(HttpMethod.POST, authenticatedUrls).authenticated()
+                            .requestMatchers(HttpMethod.PUT, authenticatedUrls).authenticated()
+                            .requestMatchers(HttpMethod.DELETE, authenticatedUrls).authenticated()
+                            .anyRequest().permitAll();
+                })
                 .build();
     }
 }
