@@ -9,11 +9,10 @@ spring:
     password: ENC(PwKfTmzrh4W8BB5UXfCXRQ==)
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
 
 jwt:
   header: Authorization
-  # #HS512 알고리즘을 사용
-  secret-key: NiOeyFbN1Gqo10bPgUyTFsRMkJpGLXSvGP04eFqj5B30r5TcrtlSXfQ7TndvYjNvfkEKLqILn0j1SmKODO1Yw3JpBBgI3nVPEahqxeY8qbPSFGyzyEVxnl4AQcrnVneI
-  token-validity-in-seconds: 86400
+  secret-key: ENC(XSpRq78Ndj/oX3clzShH/+f0kt9bElNi5EcbTkBqOfat/Cj8bB7qUwGe/PuzFSnXSX72NStvnafxtU5UMzjY3PSERnbvsvlU4UqDLtDMPLXR9Gqs1HAt1+L6pH1dsxpGFpFRqpa/EUx/n+SDnlg8f0C02C+OHQRRdJlEon5IFUqcjaUzBoHoqQiSJC1XQGf8)
+  token-validity-in-seconds: ENC(o0tuuMJU/8L1pM2Tq/wTXA==)
