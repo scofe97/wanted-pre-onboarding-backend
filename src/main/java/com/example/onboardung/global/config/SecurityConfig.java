@@ -6,6 +6,7 @@ import com.example.onboardung.global.auth.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -27,7 +28,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
 
-    private final String[] authenticatedUrls = {"/members/**"};
+    private final String[] authenticatedUrls = {"/members/**", "/posts/**"};
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -54,6 +55,7 @@ public class SecurityConfig {
 
                 // path 권한설정 (permitAll()을 진행해도 필터는 모두 동작한다.)
                 .authorizeHttpRequests(authorizeRequest -> authorizeRequest
+                        .requestMatchers(HttpMethod.GET, "/posts/**").permitAll()
                         .requestMatchers(authenticatedUrls).authenticated()
                         .anyRequest().permitAll())
                 .build();
