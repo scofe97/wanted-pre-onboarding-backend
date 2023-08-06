@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -101,10 +100,12 @@ public class TokenProvider {
         return header;
     }
 
-    private Map<String, Object> createClaims(Member member) { // payload
+    //  payload
+    private Map<String, Object> createClaims(Member member) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", member.getMemberId());
         claims.put("email", member.getEmail());
+        claims.put("name", member.getMemberName());
         return claims;
     }
 }

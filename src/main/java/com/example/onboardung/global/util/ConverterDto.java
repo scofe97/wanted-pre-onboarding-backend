@@ -12,6 +12,6 @@ public class ConverterDto {
     }
 
     public static PostResponse convertPostResponse(Post post){
-        return new PostResponse(post.getPostId(), post.getContent());
+        return new PostResponse(post.getPostId(), post.getMember().getMemberName(),post.getContent());
     }
 }

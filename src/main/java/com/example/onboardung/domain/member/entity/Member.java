@@ -27,21 +27,26 @@ public class Member {
     private String email;
 
     @NonNull
+    private String memberName;
+
+    @NonNull
     @Size(min=8, message="비밀번호는 최소 8글자이다.")
     private String password;
 
     public static Member from(SignUpRequest request, PasswordEncoder encoder) {	// 파라미터에 PasswordEncoder 추가
         return Member.builder()
                 .email(request.email())
+                .memberName(request.name())
                 .password(encoder.encode(request.password()))
                 .build();
     }
 
     public static Member from(Claims claims) {
         return Member.builder()
-                .memberId(Long.valueOf(claims.get("id").toString()))
+                .memberId(Long.valueOf(claims.getOrDefault("id", "").toString()))
+                .memberName(claims.getOrDefault("name", "").toString())
                 .password("")
-                .email(claims.get("email").toString())
+                .email(claims.getOrDefault("email", "").toString())
                 .build();
     }
 
@@ -50,6 +55,7 @@ public class Member {
         return "Member{" +
                 "id=" + memberId +
                 ", email='" + email + '\'' +
+                ", name='" + memberName + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
