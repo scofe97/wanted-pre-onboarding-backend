@@ -22,10 +22,10 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> authSignUp(@Valid @RequestBody SignUpRequest signUpRequest) {
-        authService.signUp(signUpRequest);
+        String message = authService.signUp(signUpRequest);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body("회원가입 성공");
+                .body(message);
     }
 
     @PostMapping("/login")

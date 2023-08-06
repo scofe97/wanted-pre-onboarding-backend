@@ -21,11 +21,13 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void signUp(SignUpRequest request) {
-
-        //todo eamil이나 ,특정조건이 중복되면 예외발생 추가
+    public String signUp(SignUpRequest request) {
+        if(memberRepository.findByEmail(request.email()).isPresent()){
+            return "이미 존재하는 이메일입니다";
+        }
 
         memberRepository.save(Member.from(request, passwordEncoder));
+        return "회원가입 성공";
     }
 
     @Transactional(readOnly = true)

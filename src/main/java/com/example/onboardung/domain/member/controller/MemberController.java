@@ -29,7 +29,7 @@ public class MemberController {
     }
 
     @GetMapping("/test")
-    public ResponseEntity<?> authLogin(@AuthenticationPrincipal Member member) {
+    public ResponseEntity<?> test(@AuthenticationPrincipal Member member) {
         log.info("member = {}", member);
         return new ResponseEntity<>("정상호출", HttpStatus.OK);
     }
