@@ -20,7 +20,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long memberId;
 
     @NonNull
     @Pattern(regexp=".*@.*", message="이메일은 @이 포함되어야 한다.")
@@ -39,7 +39,7 @@ public class Member {
 
     public static Member from(Claims claims) {
         return Member.builder()
-                .id(Long.valueOf(claims.get("id").toString()))
+                .memberId(Long.valueOf(claims.get("id").toString()))
                 .password("")
                 .email(claims.get("email").toString())
                 .build();
@@ -48,7 +48,7 @@ public class Member {
     @Override
     public String toString() {
         return "Member{" +
-                "id=" + id +
+                "id=" + memberId +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

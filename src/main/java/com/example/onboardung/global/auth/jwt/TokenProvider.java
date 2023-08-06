@@ -103,7 +103,7 @@ public class TokenProvider {
 
     private Map<String, Object> createClaims(Member member) { // payload
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", member.getId());
+        claims.put("id", member.getMemberId());
         claims.put("email", member.getEmail());
         return claims;
     }
