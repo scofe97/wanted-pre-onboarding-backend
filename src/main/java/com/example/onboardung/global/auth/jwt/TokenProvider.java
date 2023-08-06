@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -90,7 +91,7 @@ public class TokenProvider {
                 .getBody();
 
         // Authentication(인증) 구현체, (사용자 -, 비밀번호, 권한)
-        return new UsernamePasswordAuthenticationToken(claims, token, List.of(new SimpleGrantedAuthority("USER")));
+        return new UsernamePasswordAuthenticationToken(Member.from(claims), token, List.of(new SimpleGrantedAuthority("USER")));
     }
 
     private Map<String, Object> createHeader() {
