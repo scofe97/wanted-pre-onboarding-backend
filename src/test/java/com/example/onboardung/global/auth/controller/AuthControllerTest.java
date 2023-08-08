@@ -32,7 +32,7 @@ class AuthControllerTest {
     @Autowired
     private WebApplicationContext ctx;
 
-    @Autowired
+    @MockBean
     private TokenProvider tokenProvider;
 
     @MockBean

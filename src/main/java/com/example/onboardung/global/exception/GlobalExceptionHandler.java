@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<String> handleSuchElementExceptions(NoSuchElementException ex) {
+    public ResponseEntity<String> handleSuchElementExceptions() {
         return new ResponseEntity<>("해당 객체가 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
     }
 }

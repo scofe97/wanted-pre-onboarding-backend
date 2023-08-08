@@ -6,17 +6,14 @@ import com.example.onboardung.global.auth.dto.SignUpRequest;
 
 public class AuthSteps {
     public static SignUpRequest getSignUpRequest() {
-        SignUpRequest request = new SignUpRequest("test@", "test", "password1234");
-        return request;
+        return new SignUpRequest("test@", "test", "password1234");
     }
 
     public static LoginRequest getLoginRequest() {
-        LoginRequest request = new LoginRequest("test@", "password1234");
-        return request;
+        return new LoginRequest("test@", "password1234");
     }
 
     public static Member getMember() {
-        Member member = new Member(1L, "test@", "test", "encodedPassword");
-        return member;
+        return new Member(1L, "test@", "test", "encodedPassword");
     }
 }

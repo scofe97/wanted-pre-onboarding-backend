@@ -39,12 +39,4 @@ public class AuthController {
                 .headers(httpHeaders)
                 .body("로그인 성공");
     }
-
-    @GetMapping("/test")
-    public ResponseEntity<?> authLogin() {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("정상호출");
-    }
-
 }
