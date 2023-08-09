@@ -3,6 +3,7 @@ version: "3.8"
 services:
   prod-db:
     image: mysql
+
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
@@ -14,6 +15,7 @@ services:
 
   prod-web:
     restart: on-failure
+
     build:
       context: .
       dockerfile: Dockerfile
