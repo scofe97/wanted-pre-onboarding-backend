@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  prod-db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+
+    ports:
+      - "3306:3306"
+
+  prod-web:
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROFILE: ${WEB_PROFILE}
+        JASYPT_ENCRYPTOR_PASSWORD: ${WEB_JASYPT_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
