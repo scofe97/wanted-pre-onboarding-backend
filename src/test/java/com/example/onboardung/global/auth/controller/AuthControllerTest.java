@@ -50,7 +50,9 @@ class AuthControllerTest {
     @Test
     void 회원가입_성공() throws Exception {
         SignUpRequest signUpRequest = AuthSteps.getSignUpRequest();
-        when(authService.signUp(signUpRequest)).thenReturn("회원가입 성공");
+        when(authService
+                .signUp(signUpRequest))
+                .thenReturn("회원가입 성공");
 
         mockMvc.perform(post("/auth/signup")
                         .contentType(MediaType.APPLICATION_JSON)

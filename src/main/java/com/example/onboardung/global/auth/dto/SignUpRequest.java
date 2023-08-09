@@ -3,7 +3,9 @@ package com.example.onboardung.global.auth.dto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
+@Builder
 public record SignUpRequest(
         @Pattern(regexp = ".*@.*", message = "@를 넣어서 이메일을 만들어주세요")
         String email,

@@ -25,26 +25,31 @@ public class PostController {
     @PostMapping
     public ResponseEntity<?> postAdd(@AuthenticationPrincipal Member member, @RequestBody PostRequest postRequest
     ) {
-        return new ResponseEntity<>(postWriteService.addPost(member, postRequest), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(postWriteService.addPost(member, postRequest));
     }
 
     @GetMapping("/{postId}")
     public ResponseEntity<?> postDetails(@PathVariable("postId") Long postId) {
-        return new ResponseEntity<>(postReadService.findPost(postId), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(postReadService.findPost(postId));
     }
 
     @GetMapping
     public ResponseEntity<?> postList(Pageable pageable) {
-        return new ResponseEntity<>(postReadService.findPostList(pageable), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(postReadService.findPostList(pageable));
     }
 
     @PutMapping("/{postId}")
     public ResponseEntity<?> postModify(@AuthenticationPrincipal Member member, @PathVariable("postId") Long postId, @RequestBody PostRequest postRequest) {
-        return new ResponseEntity<>(postWriteService.modifyPost(member, postId, postRequest), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(postWriteService.modifyPost(member, postId, postRequest));
     }
 
     @DeleteMapping("/{postId}")
     public ResponseEntity<?> postRemove(@AuthenticationPrincipal Member member, @PathVariable("postId") Long postId) {
-        return new ResponseEntity<>(postWriteService.removePost(member, postId), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(postWriteService.removePost(member, postId));
     }
 }

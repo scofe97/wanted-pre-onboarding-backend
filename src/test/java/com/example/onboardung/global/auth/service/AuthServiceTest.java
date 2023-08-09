@@ -76,7 +76,7 @@ class AuthServiceTest {
     @Test
     void 로그인_성공() {
         LoginRequest request = AuthSteps.getLoginRequest();
-        Member member = AuthSteps.getMember();
+        Member member = AuthSteps.getTrueMember();
 
         // 중복 이메일이 없다
         when(memberRepository.findByEmail(request.email())).thenReturn(Optional.of(member));

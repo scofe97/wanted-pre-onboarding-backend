@@ -2,7 +2,9 @@ package com.example.onboardung.global.auth.dto;
 
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
+@Builder
 public record LoginRequest(
         @Pattern(regexp = ".*@.*", message = "Email should contain @")
         String email,

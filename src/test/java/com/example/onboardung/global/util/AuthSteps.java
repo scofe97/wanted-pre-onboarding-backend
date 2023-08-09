@@ -6,14 +6,35 @@ import com.example.onboardung.global.auth.dto.SignUpRequest;
 
 public class AuthSteps {
     public static SignUpRequest getSignUpRequest() {
-        return new SignUpRequest("test@", "test", "password1234");
+        return SignUpRequest.builder()
+                .email("test@")
+                .name("test")
+                .password("password1234")
+                .build();
     }
 
     public static LoginRequest getLoginRequest() {
-        return new LoginRequest("test@", "password1234");
+        return LoginRequest.builder()
+                .email("test@")
+                .password("password1234")
+                .build();
     }
 
-    public static Member getMember() {
-        return new Member(1L, "test@", "test", "encodedPassword");
+    public static Member getTrueMember() {
+        return Member.builder()
+                .memberId(1L)
+                .email("test@")
+                .memberName("test")
+                .password("encodedPassword")
+                .build();
+    }
+
+    public static Member getFalseMember() {
+        return Member.builder()
+                .memberId(2L)
+                .email("test2@")
+                .memberName("test2")
+                .password("encodedPassword")
+                .build();
     }
 }

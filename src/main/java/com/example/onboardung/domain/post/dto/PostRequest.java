@@ -1,6 +1,11 @@
 package com.example.onboardung.domain.post.dto;
 
+import lombok.Builder;
+import lombok.NonNull;
+
+@Builder
 public record PostRequest(
-    String content
+        @NonNull
+        String content
 ) {
 }
