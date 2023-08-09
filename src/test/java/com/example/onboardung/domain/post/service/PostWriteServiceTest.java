@@ -2,12 +2,12 @@ package com.example.onboardung.domain.post.service;
 
 import com.example.onboardung.domain.member.entity.Member;
 import com.example.onboardung.domain.post.dto.PostRequest;
-import com.example.onboardung.domain.post.dto.PostResponse;
 import com.example.onboardung.domain.post.entity.Post;
 import com.example.onboardung.domain.post.exception.NoPostWriterException;
 import com.example.onboardung.domain.post.repository.PostRepository;
 import com.example.onboardung.global.auth.jwt.TokenProvider;
 import com.example.onboardung.global.util.AuthSteps;
+import com.example.onboardung.global.util.ConverterDto;
 import com.example.onboardung.global.util.PostSteps;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,8 +17,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -61,10 +63,9 @@ class PostWriteServiceTest {
         Member write_member = AuthSteps.getTrueMember();
         Member login_member = AuthSteps.getTrueMember();
         Post post = PostSteps.getPost(write_member, postModifyRequest);
-        PostResponse postResponse = PostSteps.getPostModifyResponse();
 
         when(postRepository.findById(anyLong())).thenReturn(Optional.ofNullable(post));
-        assertEquals(postResponse, postWriteService.modifyPost(login_member, 1L, postModifyRequest));
+        assertEquals(ConverterDto.convertPostResponse(post), postWriteService.modifyPost(login_member, 1L, postModifyRequest));
     }
 
     @Test

@@ -22,6 +22,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -88,8 +91,20 @@ class PostControllerTest {
     }
 
     @Test
-    void postList() {
+    void 게시물리스트조회_성공() throws Exception {
+        List<PostResponse> postResponsesList = IntStream.range(0, 10)
+                .mapToObj(i -> PostSteps.getPostResponse())
+                .toList();
 
+        when(postReadService.findPostList(any()))
+                .thenReturn(postResponsesList);
+
+        mockMvc.perform(get("/posts")
+                        .param("page", "0")
+                        .param("size", "10")
+                        .param("sort", "createdAt,desc")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
     @Test
