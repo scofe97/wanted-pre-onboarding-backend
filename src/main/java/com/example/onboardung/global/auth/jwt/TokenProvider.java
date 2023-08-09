@@ -108,22 +108,4 @@ public class TokenProvider {
         claims.put("name", member.getMemberName());
         return claims;
     }
-
-    public String createTestToken() {
-        Member testMember = Member.builder()
-                .memberId(1L)
-                .email("test@")
-                .memberName("test")
-                .build();
-
-        return createToken(testMember);
-    }
-
-    public Claims getClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(secretKey.getBytes())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-    }
 }

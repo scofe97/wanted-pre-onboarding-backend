@@ -1,5 +1,6 @@
 package com.example.onboardung.global.exception;
 
+import com.example.onboardung.domain.post.exception.NoPostWriterException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,5 +21,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handleSuchElementExceptions() {
         return new ResponseEntity<>("해당 객체가 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NoPostWriterException.class)
+    public ResponseEntity<String> handleNoPostWriterExceptions(NoPostWriterException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
