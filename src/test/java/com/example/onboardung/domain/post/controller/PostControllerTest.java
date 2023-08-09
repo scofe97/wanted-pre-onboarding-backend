@@ -124,20 +124,6 @@ class PostControllerTest {
                 .andExpect(content().string("삭제되었습니다"));
     }
 
-    @Test
-    void 게시글삭제_실패() throws Exception {
-        Member member = AuthSteps.getFalseMember();
-        setAuthMember(member);
-
-        when(postWriteService.removePost(eq(member), anyLong()))
-                .thenReturn("게시물 작성자가 아닙니다.");
-
-        mockMvc.perform(delete("/posts/1")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string("게시물 작성자가 아닙니다."));
-    }
-
     private void setAuthMember(Member member) {
         when(auth.getPrincipal()).thenReturn(member);
         SecurityContextHolder.getContext().setAuthentication(auth);

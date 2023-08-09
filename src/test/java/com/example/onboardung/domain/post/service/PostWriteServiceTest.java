@@ -61,7 +61,7 @@ class PostWriteServiceTest {
         Member write_member = AuthSteps.getTrueMember();
         Member login_member = AuthSteps.getTrueMember();
         Post post = PostSteps.getPost(write_member, postModifyRequest);
-        PostResponse postResponse = PostSteps.getPostResponse();
+        PostResponse postResponse = PostSteps.getPostModifyResponse();
 
         when(postRepository.findById(anyLong())).thenReturn(Optional.ofNullable(post));
         assertEquals(postResponse, postWriteService.modifyPost(login_member, 1L, postModifyRequest));

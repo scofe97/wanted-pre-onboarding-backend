@@ -35,6 +35,9 @@ dependencies {
 
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 
+	// in memory test
+	implementation 'com.h2database:h2'
+
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -47,3 +50,4 @@ tasks.named('test') {
 	useJUnitPlatform()
 	systemProperty 'jasypt.encryptor.password', findProperty("jasypt.encryptor.password")
 }
+
