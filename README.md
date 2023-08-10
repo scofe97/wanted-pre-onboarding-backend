@@ -143,7 +143,7 @@ https://wantedonboarding.duckdns.org/ (AWS 서버 - 8080 port 연결)
 [데모영상](https://youtu.be/z_Upurgf22Q)
 
 ![Swagger 이미지](./images/Swagger.png)
-https://wantedonboarding.duckdns.org/swagger-ui/index.htmll (Swagger 주소)
+https://wantedonboarding.duckdns.org/swagger-ui/index.html#/ (Swagger 주소)
 
 #### 1. **Member**
 
