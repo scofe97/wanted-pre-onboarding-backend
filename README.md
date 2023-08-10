@@ -23,9 +23,10 @@
 
 &nbsp;
 
-## 2. AWS 배포 주소
+## 2. AWS 배포
 
-![AWS 구조](./images/AWS 구조.png)
+![AWS](./images/awsArchitecture.png)
+- AWS 구조도
 
 https://wantedonboarding.duckdns.org/ (AWS 서버 - 8080 port 연결)
 
@@ -139,7 +140,7 @@ https://wantedonboarding.duckdns.org/ (AWS 서버 - 8080 port 연결)
 &nbsp;
 
 ## 5. API 명세 / Demo 영상
-![데모영상](https://youtu.be/z_Upurgf22Q)
+[데모영상](https://youtu.be/z_Upurgf22Q)
 
 ![Swagger 이미지](./images/Swagger.png)
 https://wantedonboarding.duckdns.org/swagger-ui/index.htmll (Swagger 주소)
