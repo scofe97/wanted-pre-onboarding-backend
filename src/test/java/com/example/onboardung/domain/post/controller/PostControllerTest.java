@@ -64,17 +64,18 @@ class PostControllerTest {
     @Test
     void 게시글작성_성공() throws Exception {
         PostRequest postRequest = PostSteps.getPostRequest();
+        PostResponse postResponse = PostSteps.getPostResponse();
         Member member = AuthSteps.getTrueMember();
         setAuthMember(member);
 
         when(postWriteService.addPost(eq(member), any(PostRequest.class)))
-                .thenReturn("글이 생성되었습니다.");
+                .thenReturn(postResponse);
 
         mockMvc.perform(post("/posts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new Gson().toJson(postRequest)))
                 .andExpect(status().isCreated())
-                .andExpect(content().string("글이 생성되었습니다."));
+                .andExpect(content().json(new Gson().toJson(postResponse)));
 
     }
 

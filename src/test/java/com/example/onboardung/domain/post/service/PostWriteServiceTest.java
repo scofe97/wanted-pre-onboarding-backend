@@ -2,6 +2,7 @@ package com.example.onboardung.domain.post.service;
 
 import com.example.onboardung.domain.member.entity.Member;
 import com.example.onboardung.domain.post.dto.PostRequest;
+import com.example.onboardung.domain.post.dto.PostResponse;
 import com.example.onboardung.domain.post.entity.Post;
 import com.example.onboardung.domain.post.exception.NoPostWriterException;
 import com.example.onboardung.domain.post.repository.PostRepository;
@@ -42,8 +43,8 @@ class PostWriteServiceTest {
         Post post = PostSteps.getPost(member, postRequest);
 
         when(postRepository.save(any(Post.class))).thenReturn(post);
-        String result = postWriteService.addPost(member, postRequest);
-        assertEquals("글이 생성되었습니다.", result);
+        PostResponse postResponse = postWriteService.addPost(member, postRequest);
+        assertEquals(ConverterDto.convertPostResponse(post), postResponse);
     }
 
     @Test

@@ -20,13 +20,13 @@ public class PostWriteService {
     private final PostRepository postRepository;
 
     @Transactional
-    public String addPost(Member member, PostRequest postRequest) {
-        postRepository.save(Post.builder()
+    public PostResponse addPost(Member member, PostRequest postRequest) {
+        Post post = postRepository.save(Post.builder()
                 .member(member)
                 .content(postRequest.content())
                 .build());
 
-        return "글이 생성되었습니다.";
+        return ConverterDto.convertPostResponse(post);
     }
 
 
