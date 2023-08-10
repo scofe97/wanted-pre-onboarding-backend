@@ -2,10 +2,6 @@ server:
   port: 8080
 
 spring:
-  datasource:
-    url:
-    username: ENC()
-    password: ENC()
   jpa:
     hibernate:
       ddl-auto: update

@@ -10,11 +10,20 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
 
+    volumes:
+      - ./volume/mysql:/var/lib/mysql
+
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
   local-web:
     restart: on-failure
+
+    environment:
+      SPRING_DATASOURCE_URL: ${DB_URL}
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      SPRING_DATASOURCE_DRIVER-CLASS-NAME: ${DB_DRIVER}
 
     build:
       context: .
