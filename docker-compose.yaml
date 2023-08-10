@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  # 도커 컨테이너 대시보드
+  portainer:
+    image: "portainer/portainer-ce:2.16.2"
+    ports:
+      - "9000:9000"
+    restart: unless-stopped
+
+    networks:
+      - onboarding-network
+
+  # Nginx 대시보드
+  nginx-manager:
+    image: "jc21/nginx-proxy-manager:latest"
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8000:81"
+
+    networks:
+      - onboarding-network
+
+networks:
+  onboarding-network:

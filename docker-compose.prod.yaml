@@ -16,6 +16,9 @@ services:
     ports:
       - "3306:3306"
 
+    networks:
+      - onboarding-network
+
   prod-web:
     restart: on-failure
 
@@ -35,3 +38,9 @@ services:
       - "8080:8080"
     depends_on:
       - prod-db
+
+    networks:
+      - onboarding-network
+
+networks:
+  onboarding-network:
