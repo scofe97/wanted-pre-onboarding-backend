@@ -15,16 +15,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         String errorMessage = ex.getBindingResult().getFieldError().getDefaultMessage();
-        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(errorMessage);
     }
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handleSuchElementExceptions() {
-        return new ResponseEntity<>("해당 객체가 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("해당 객체가 존재하지 않습니다.");
     }
 
     @ExceptionHandler(NoPostWriterException.class)
     public ResponseEntity<String> handleNoPostWriterExceptions(NoPostWriterException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(ex.getMessage());
     }
 }

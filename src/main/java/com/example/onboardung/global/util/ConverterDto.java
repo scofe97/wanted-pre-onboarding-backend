@@ -8,10 +8,16 @@ import com.example.onboardung.domain.post.entity.Post;
 public class ConverterDto {
 
     public static MemberResponse convertMemberResponse(Member member) {
-        return new MemberResponse(member.getEmail());
+        return MemberResponse.builder()
+                .email(member.getEmail())
+                .build();
     }
 
     public static PostResponse convertPostResponse(Post post){
-        return new PostResponse(post.getPostId(), post.getMember().getMemberName(),post.getContent());
+        return PostResponse.builder()
+                .postId(post.getPostId())
+                .author(post.getMember().getMemberName())
+                .content(post.getContent())
+                .build();
     }
 }
