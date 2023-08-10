@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   prod-db:
-    image: mysql
+    image: mysql:8.0
 
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
