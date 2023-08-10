@@ -1,5 +1,6 @@
 package com.example.onboardung.global.exception;
 
+import com.example.onboardung.domain.member.exception.MemberAlreadyExistsException;
 import com.example.onboardung.domain.post.exception.NoPostWriterException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoPostWriterException.class)
     public ResponseEntity<String> handleNoPostWriterExceptions(NoPostWriterException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(MemberAlreadyExistsException.class)
+    public ResponseEntity<String> handleMemberAlreadyExistsExceptions(MemberAlreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ex.getMessage());
     }
 }

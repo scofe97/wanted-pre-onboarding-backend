@@ -1,6 +1,7 @@
 package com.example.onboardung.global.auth.service;
 
 import com.example.onboardung.domain.member.entity.Member;
+import com.example.onboardung.domain.member.exception.MemberAlreadyExistsException;
 import com.example.onboardung.domain.member.repository.MemberRepository;
 import com.example.onboardung.global.auth.dto.LoginRequest;
 import com.example.onboardung.global.auth.dto.SignUpRequest;
@@ -22,10 +23,7 @@ public class AuthService {
 
     @Transactional
     public String signUp(SignUpRequest request) {
-        if(memberRepository.findByEmail(request.email()).isPresent()){
-            return "이미 존재하는 이메일입니다";
-        }
-
+        validateSignUp(request);
         memberRepository.save(Member.from(request, passwordEncoder));
         return "회원가입 성공";
     }
@@ -37,5 +35,11 @@ public class AuthService {
                 .orElseThrow();
 
         return tokenProvider.createToken(loginMember);
+    }
+
+    private void validateSignUp(SignUpRequest request) {
+        if(memberRepository.findByEmail(request.email()).isPresent()){
+            throw new MemberAlreadyExistsException("이미 존재하는 이메일입니다.");
+        }
     }
 }

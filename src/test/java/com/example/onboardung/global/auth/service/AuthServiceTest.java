@@ -1,6 +1,7 @@
 package com.example.onboardung.global.auth.service;
 
 import com.example.onboardung.domain.member.entity.Member;
+import com.example.onboardung.domain.member.exception.MemberAlreadyExistsException;
 import com.example.onboardung.domain.member.repository.MemberRepository;
 import com.example.onboardung.global.auth.dto.LoginRequest;
 import com.example.onboardung.global.auth.dto.SignUpRequest;
@@ -40,13 +41,11 @@ class AuthServiceTest {
         // given
         SignUpRequest request = AuthSteps.getSignUpRequest();
 
-
         // when
         when(memberRepository.findByEmail(request.email())).thenReturn(Optional.of(new Member()));
-        String result = authService.signUp(request);
 
         // then
-        assertEquals("이미 존재하는 이메일입니다", result);
+        assertThrows(MemberAlreadyExistsException.class, () -> authService.signUp(request));
     }
 
     @Test
