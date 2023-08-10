@@ -1,0 +1,8 @@
+jasypt:
+  encryptor:
+    bean: jasyptEncryptorAES
+
+jwt:
+  header: Authorization
+  secret-key: ENC(XSpRq78Ndj/oX3clzShH/+f0kt9bElNi5EcbTkBqOfat/Cj8bB7qUwGe/PuzFSnXSX72NStvnafxtU5UMzjY3PSERnbvsvlU4UqDLtDMPLXR9Gqs1HAt1+L6pH1dsxpGFpFRqpa/EUx/n+SDnlg8f0C02C+OHQRRdJlEon5IFUqcjaUzBoHoqQiSJC1XQGf8)
+  token-validity-in-seconds: ENC(o0tuuMJU/8L1pM2Tq/wTXA==)
