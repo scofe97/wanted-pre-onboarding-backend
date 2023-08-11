@@ -91,11 +91,11 @@ https://wantedonboarding.duckdns.org/ (AWS 서버 - 8080 port 연결)
   DB_USER=
   DB_PASSWORD=
   WEB_PROFILE=prod
-  WEB_JASYPT_PASSWORD=
+  WEB_JASYPT_PASSWORD=password
 
   DB_URL=jdbc:mysql://prod-db:3306/onboarding?useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&serverTimezone=Asia/Seoul
   DB_USERNAME=
-  DB_PASSWORD=password
+  DB_PASSWORD=
   DB_DRIVER=com.mysql.cj.jdbc.Driver
   ```
 
