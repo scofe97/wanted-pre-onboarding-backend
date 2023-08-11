@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Profile;
 @Profile("prod")
 @OpenAPIDefinition(
         servers = @Server(url = "https://wantedonboarding.duckdns.org/"),
-        info = @Info(title = "Couple App", description = "couple app api명세", version = "v1"),
+        info = @Info(title = "원티드 선발과제 API 명세서", description = "선발과제 API 테스트를 위한 명세서입니다.", version = "v1"),
         security = @SecurityRequirement(name = "Bearer"))
 @SecurityScheme(
         name = "Bearer",
@@ -35,7 +35,7 @@ public class SwaggerConfig {
         String[] paths = {"/**"};
 
         return GroupedOpenApi.builder()
-                .group("COUPLE API v1")
+                .group("API v1")
                 .pathsToMatch(paths)
                 .build();
     }
